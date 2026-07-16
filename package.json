@@ -1,6 +1,6 @@
 {
   "name": "node-cli-banner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Beautiful startup dashboard for Node.js CLIs — version, environment, git branch, Node, memory, CPU, uptime, and themes.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -40,7 +40,14 @@
     "nodejs",
     "typescript",
     "commander",
-    "yargs"
+    "yargs",
+    "splash",
+    "cli-ui",
+    "startup-banner",
+    "console-banner",
+    "branding",
+    "boxen",
+    "figlet"
   ],
   "author": "Anil Kumar <anilachary67@gmail.com>",
   "license": "MIT",
