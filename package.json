@@ -1,6 +1,6 @@
 {
   "name": "node-cli-banner",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Beautiful startup dashboard for Node.js CLIs — version, environment, git branch, Node, memory, CPU, uptime, and themes.",
   "type": "module",
   "main": "./dist/index.cjs",

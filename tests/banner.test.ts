@@ -4,6 +4,7 @@ import {
   printBanner,
   createBanner,
   THEMES,
+  sampleCpuPercent,
 } from "../src/index.js";
 
 describe("renderBanner", () => {
@@ -96,5 +97,13 @@ describe("renderBanner", () => {
   it("exposes built-in themes", () => {
     expect(THEMES.default).toBeTruthy();
     expect(THEMES.ocean.name).toBe("ocean");
+  });
+});
+
+describe("sampleCpuPercent", () => {
+  it("returns a clamped percentage without blocking", () => {
+    const value = sampleCpuPercent(process, 20);
+    expect(value).toBeGreaterThanOrEqual(0);
+    expect(value).toBeLessThanOrEqual(100);
   });
 });

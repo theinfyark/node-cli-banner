@@ -33,23 +33,15 @@ function environmentLabel(explicit?: string): string {
 }
 
 /**
- * Best-effort CPU usage % for this process (sampled over a short interval).
- * Synchronous-safe estimate using cpuUsage deltas vs elapsed time.
+ * Average CPU usage % for this process since start (no busy-wait).
+ * `_sampleMs` is kept for API compatibility and is unused.
  */
 export function sampleCpuPercent(
   processRef: NodeJS.Process = process,
-  sampleMs = 20,
+  _sampleMs = 20,
 ): number {
-  const startUsage = processRef.cpuUsage();
-  const start = Date.now();
-  // Busy-wait tiny window for a sync sample (CLI startup only).
-  const endAt = start + sampleMs;
-  while (Date.now() < endAt) {
-    /* intentional */
-  }
-  const usage = processRef.cpuUsage(startUsage);
-  const elapsedUs = (Date.now() - start) * 1000;
-  if (elapsedUs <= 0) return 0;
+  const usage = processRef.cpuUsage();
+  const elapsedUs = Math.max(1, processRef.uptime() * 1e6);
   const percent = ((usage.user + usage.system) / elapsedUs) * 100;
   return Math.max(0, Math.min(100, Math.round(percent)));
 }
